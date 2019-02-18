@@ -1,3 +1,8 @@
+/*
+    Find the number that is a perfect square
+    and also the sum of a series 1..n
+*/
+
 #include <iostream>
 #include <sstream>
 
