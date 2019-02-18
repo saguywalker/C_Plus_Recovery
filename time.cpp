@@ -27,11 +27,17 @@ void Time::increment(){
 
 void Time::decrement(){
     seconds--;
-    minutes = seconds < 0 ? --minutes : minutes;
-    hours = minutes < 0 ? --hours : hours;
-    seconds = seconds < 0 ? 60 + seconds: seconds;
-    minutes = minutes < 0 ? 60 + minutes: minutes;
-    hours = hours < 0 ? 24 + hours: hours;
+    if (seconds < 0){
+        minutes--;
+        seconds += 60;
+    }
+    if (minutes < 0){
+        hours--;
+        minutes += 60;
+    }
+    if (hours < 0){
+        hours += 24;
+    }
 }
 
 void Time::display(){
