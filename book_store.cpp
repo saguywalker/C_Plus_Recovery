@@ -3,6 +3,7 @@
 */
 
 #include <iostream>
+#include <vector>
 
 using namespace::std;
 
@@ -12,38 +13,68 @@ class Book{
         float price;        //single copy price
         int inventory;         //number on hand
         int prosEnrollment; //prospective enrollment
-        bool isRequest;     //true => request, false => optional
+        bool isRequire;     //true => request, false => optional
         bool isNew;         //true => new, false => used
     public:
-        void set(int _code, float _price, int _inventory, int _enroll, int _request, int _new){
-            code = _code;
-            price = _price;
-            inventory = _inventory;
-            prosEnrollment = _enroll;
-            isRequest = _request;
-            isNew = _new;
-        }
+        Book(int _code, float _price, int _inventory, int _enroll, int _request, int _new);
+        void display();
+
+
 };
 
 int main(){
+    vector<Book> bs;
     int code, inventory, prosEnrollment;
     float price;
-    bool isRequest, isNew;
-    cout << "Please enter the book code: ";
-    cin >> code;
-    cout << "single copy price: ";
-    cin >> price;
-    cout << "number on hand: ";
-    cin >> inventory;
-    cout << "prospective enrollment: ";
-    cin >> prosEnrollment;
-    cout << "1 for reqd/0 for optional: ";
-    cin >> isRequest;
-    cout << "1 for new/0 for used: ";
-    cin >> isNew;
-
-    Book b1;
-    b1.set(code, price, inventory, prosEnrollment, isRequest, isNew); 
-
+    bool isRequire, isNew;
+    int count = -1;
+    while(true){
+        cout << "Please enter the book code: ";
+        cin >> code;
+        cout << "single copy price: ";
+        cin >> price;
+        cout << "number on hand: ";
+        cin >> inventory;
+        cout << "prospective enrollment: ";
+        cin >> prosEnrollment;
+        cout << "1 for reqd/0 for optional: ";
+        cin >> isRequire;
+        cout << "1 for new/0 for used: ";
+        cin >> isNew;
+        Book book(code,price,inventory,prosEnrollment,isRequire, isNew);
+        bs.push_back(book);
+        cout << "*************************************************" << endl;
+        bs.back().display();
+    }
     return 0;
+}
+
+Book::Book(int _code, float _price, int _inventory, int _enroll, int _request, int _new){
+    code = _code;
+    price = _price;
+    inventory = _inventory;
+    prosEnrollment = _enroll;
+    isRequire = _request;
+    isNew = _new;
+}
+
+void Book::display(){
+    cout << "Book: " << code << endl
+            << "Price: " << price << endl
+            << "Inventory: " << inventory << endl
+            << "Enrollment: " << prosEnrollment << endl << endl
+            << "This book is ";
+    if (isRequire){
+        cout << "required and ";
+    }else{
+        cout << "optional and ";
+    }
+
+    if (isNew){
+        cout << "new";
+    }else{
+        cout << "used";
+    }
+    cout << endl;
+
 }
